@@ -54,5 +54,5 @@ func (s *Stack[T]) Size() int {
 func (s *Stack[T]) Drain() {
 	s.lock.Lock()
 	defer s.lock.Unlock()
-	s.data = nil
+	s.data = make([]T, 0)
 }

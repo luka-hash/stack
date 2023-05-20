@@ -106,7 +106,7 @@ func TestDrain(t *testing.T) {
 	s.Push(5)
 	s.Drain()
 	sz := s.Size()
-	if sz != 0 || s.data != nil { // should prob be just "sz != 0"
+	if sz != 0 {
 		t.Errorf("[In TestDrain()] s.Drain() - expected 0, but got %d\n", sz)
 	}
 }

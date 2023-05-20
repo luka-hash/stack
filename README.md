@@ -1,6 +1,6 @@
 # stack
 
-A thread-safe generic stack implementation for Go(lang). It is designed for simplicity.
+A thread-safe generic stack implementation for Go (version 1.18+). It is designed for simplicity.
 
 ## Performance
 
