@@ -25,16 +25,6 @@ func (s *Stack[T]) Push(value T) {
 	s.data = append(s.data, value)
 }
 
-func (s *Stack[T]) Peek() (T, error) {
-	s.lock.Lock()
-	defer s.lock.Unlock()
-	length := len(s.data)
-	if length == 0 {
-		return *new(T), errors.New("trying to peek into an empty stack")
-	}
-	return s.data[length-1], nil
-}
-
 func (s *Stack[T]) Pop() (T, error) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
@@ -47,13 +37,33 @@ func (s *Stack[T]) Pop() (T, error) {
 	return value, nil
 }
 
-func (s *Stack[T]) Size() int {
+func (s *Stack[T]) Peek() (T, error) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	length := len(s.data)
+	if length == 0 {
+		return *new(T), errors.New("trying to peek into an empty stack")
+	}
+	return s.data[length-1], nil
+}
+
+func (s *Stack[T]) Top() (T, error) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	length := len(s.data)
+	if length == 0 {
+		return *new(T), errors.New("trying to peek into an empty stack")
+	}
+	return s.data[length-1], nil
+}
+
+func (s *Stack[T]) Len() int {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	return len(s.data)
 }
 
-func (s *Stack[T]) Drain() {
+func (s *Stack[T]) Clear() {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	s.data = make([]T, 0)
